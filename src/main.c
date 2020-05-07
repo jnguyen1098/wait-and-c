@@ -1,5 +1,4 @@
 #include "program.h"
-#include "cheat.h"
 
 int main(void)
 {
@@ -26,7 +25,6 @@ int main(void)
     /* realloc */
     char *small = strcpy(realloc(NULL, 10), "g force");
     puts(small);
-    clean(small);
     small = strcpy(realloc(small, 1000), "test test t estset set s");
     puts(small);
 
@@ -34,11 +32,6 @@ int main(void)
     char *pagakfdsgjhalskghaslggagjkh = this_malloc_comes_from_the_far_lands();
     if (pagakfdsgjhalskghaslggagjkh)
         ;
-
-#undef free
-
-    for (int i = 0; i < t; i++)
-        free(s[i]), s[i] = 0;
 
     return 0;
 }

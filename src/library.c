@@ -1,5 +1,4 @@
 #include "program.h"
-#include "cheat.h"
 
 char *this_malloc_comes_from_the_far_lands(void)
 {
