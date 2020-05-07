@@ -1,18 +1,19 @@
 CC = clang
-CFLAGS = -Wall -Wpedantic -Wextra -ggdb -I.
+CFLAGS = -Wall -Wpedantic -Wextra -ggdb -Iinclude
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 
-valgrind: main
-	valgrind $(VFLAGS) ./main
+valgrind: bin/main
+	valgrind $(VFLAGS) ./bin/main
 
-main: main.o library.o program.h
-	$(CC) $(CFLAGS) library.o main.o -o main
+bin/main: obj/main.o obj/library.o include/program.h
+	$(CC) $(CFLAGS) obj/library.o obj/main.o -o bin/main
 
-main.o: main.c program.h
-	$(CC) $(CFLAGS) -c main.c -o main.o
+obj/main.o: src/main.c include/program.h
+	$(CC) $(CFLAGS) -c src/main.c -o obj/main.o
 
-library.o: library.c program.h
-	$(CC) $(CFLAGS) -c library.c -o library.o
+obj/library.o: src/library.c include/program.h
+	$(CC) $(CFLAGS) -c src/library.c -o obj/library.o
 
 clean:
-	rm -rf *.o main
+	rm -rf obj/*.o
+	rm -rf bin/main
