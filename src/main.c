@@ -2,6 +2,9 @@
 
 int main(void)
 {
+    /* :( */
+    atexit(f);
+
     /* calloc leakage */
     char *epic = calloc(1, 100);
     strcpy(epic, "memory is overrated");
