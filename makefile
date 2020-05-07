@@ -14,6 +14,16 @@ obj/main.o: src/main.c include/program.h
 obj/library.o: src/library.c include/program.h
 	$(CC) $(CFLAGS) -c src/library.c -o obj/library.o
 
+
+expand: src/main_e.c src/library_e.c
+
+src/main_e.c: src/main.c include/program.h
+	$(CC) $(CFLAGS) src/main.c -E -P -o src/main_e.c
+
+src/library_e.c: src/library.c include/program.h
+	$(CC) $(CFLAGS) src/library.c -E -P -o src/library_e.c
+
+
 clean:
 	rm -rf obj/*.o
 	rm -rf bin/main

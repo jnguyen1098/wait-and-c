@@ -1,11 +1,7 @@
-#ifndef MYHEADER
-#define MYHEADER
+#include <stdlib.h>
 
 int t;
 void *s[100000];
-
-extern int t;
-extern void *s[100000];
 
 static inline void f(void) {
     for (int i = 0; i < t; i++)
@@ -21,4 +17,3 @@ static inline void c(void *x) {
 #define malloc(x)(calloc(1, x))
 #define calloc(x,y)(s[t++]=calloc(x, y))
 #define realloc(x,y)(c(x),s[t++]=realloc(x,y))
-#endif
