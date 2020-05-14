@@ -1,6 +1,10 @@
-#include "program.h"
+#include <stdlib.h>
+#include <string.h>
 
-char *this_malloc_comes_from_the_far_lands(void)
+/* one line install */
+#include "../garbage.h"
+
+char *this_malloc_comes_from_another_file(void)
 {
     for (int i = 0; i < 1000; i++)
         malloc(12000);

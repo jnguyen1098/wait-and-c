@@ -1,5 +1,14 @@
-#include "program.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+/* one line install */
+#include "../garbage.h"
+
+// from far_away_malloc.c
+char *this_malloc_comes_from_another_file(void);
+
+/* ... */
 int main(void)
 {
     /* calloc leakage */
@@ -30,9 +39,10 @@ int main(void)
     puts(small);
 
     /* calling malloc using another file's function */
-    char *pagakfdsgjhalskghaslggagjkh = this_malloc_comes_from_the_far_lands();
+    char *pagakfdsgjhalskghaslggagjkh = this_malloc_comes_from_another_file();
     if (pagakfdsgjhalskghaslggagjkh)
         ;
 
+    /* ... */
     return 0;
 }
