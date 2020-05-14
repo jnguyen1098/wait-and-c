@@ -90,7 +90,7 @@ Commented and spaced-out versions of these files are also included in the repo.
 This is pretty jammed. Here is the spaced version.
 
 ```c
-#define realloc(x, y)\
+#define realloc(x, y)                           \
     (__extension__({                            \
         atexit(f);                              \
         if (x) {                                \
@@ -103,3 +103,9 @@ This is pretty jammed. Here is the spaced version.
         s[t++]=realloc(x,y);                    \
     }))
 ```
+
+I used a compound statement here, of the form `__extension__({})`. It's kind of like an anonymous function. The `__extension__` part isn't needed if you are not compiling with `-pedantic` or `-Wpedantic` (these flags ruin GNU extensions, so `__extension__` was added to silence this warning), but I added it just for the people who did. By creating a compound extension, I was able to include _multiple_ statements into one expression.
+
+As expected, This compound statement starts off by calling `atexit(f)`, then at the end, it returns an address just like the other ones (`s[t++] = realloc(x, y)`). The `if(x)` that occurs in between these two events checks if `x` is non-`NULL`. If `x` exists (for example, `word = realloc(word, 100)`), then a `for` loop iterates through the existing addresses array `s` and `NULL`s out any address that matches it. This is because `realloc()`'s implementation involves `free()`ing the original address. If I didn't do this, I would end up double-`free()`ing a `realloc()`'d address. I check `if (x)` in order to account for the edge case `char *word = realloc(NULL, 100)`, which is equivalent to `char *word = malloc(100)`.
+
+The experimental `garbage_seg.h` version, in addition to hitchhiking `atexit(f)`, also hitchhikes a `signal()` call (specifically `signal(SIGSEGV, f)`) so that `f()` is called when the program has a segmentation fault. This is experimental and will not always work, as the factors that go into a seg fault are not always known (for example, you'll likely face huge issues if the cause of your seg fault corrupts important parts of memory like the `s` address array).
