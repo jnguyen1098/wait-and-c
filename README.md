@@ -111,9 +111,8 @@ This is pretty jammed. Here is the spaced version.
     (__extension__({                            \
         atexit(cleanup);                        \
         if (x) {                                \
-            ptr = x;                            \
             for (size_t i = 0; i < head; i++) { \
-                if (addrs[i] == ptr)            \
+                if (addrs[i] == x)              \
                     addrs[i] = NULL;            \
             }                                   \
         }                                       \
