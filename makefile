@@ -2,6 +2,9 @@ CC = clang
 CFLAGS = -Wall -Wpedantic -Wextra -ggdb -Iinclude
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 
+run: bin/main
+	./bin/main
+
 valgrind: bin/main
 	valgrind $(VFLAGS) ./bin/main
 

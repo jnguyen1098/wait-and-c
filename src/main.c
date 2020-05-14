@@ -3,7 +3,7 @@
 int main(void)
 {
     /* calloc leakage */
-    char *epic = (atexit(f), calloc(1, 100));
+    char *epic = calloc(1, 100);
     strcpy(epic, "memory is overrated");
     puts(epic);
 
@@ -25,7 +25,8 @@ int main(void)
     /* realloc */
     char *small = strcpy(realloc(NULL, 10), "g force");
     puts(small);
-    small = strcpy(realloc(small, 1000), "test test t estset set s");
+    small = realloc(small, 1000);
+    strcpy(small, "test test t estset set s");
     puts(small);
 
     /* calling malloc using another file's function */
