@@ -1,14 +1,14 @@
 #include <stdlib.h>
 
-void *p, *s[100000];
-size_t t;
+void *ptr, *addrs[100000];
+size_t head;
 
-static inline void f() {
-    for (size_t i = 0; i < t; i++)
-        s[i] = (free(s[i]), NULL);
+static inline void cleanup() {
+    for (size_t i = 0; i < head; i++)
+        addrs[i] = (free(addrs[i]), NULL);
 }
 
 #define free(x) if(x){}
-#define malloc(x)(s[t++]=malloc(x))
-#define calloc(x,y)(s[t++]=calloc(x, y))
-#define realloc(x,y)((x?__extension__({p=x;for(size_t i=0;i<t;i++)s[i]==p?s[i]=0:0;}):atexit(f)),s[t++]=realloc(x,y))
+#define malloc(x)(addrs[head++]=malloc(x))
+#define calloc(x,y)(addrs[head++]=calloc(x,y))
+#define realloc(x,y)((x?__extension__({ptr=x;for(size_t i=0;i<head;i++)addrs[i]==ptr?addrs[i]=0:0;}):(void)0),addrs[head++]=realloc(x,y))
