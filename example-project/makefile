@@ -1,5 +1,5 @@
-CC = clang
-CFLAGS = -Wall -Wpedantic -Wextra -ggdb -I..
+CC = gcc
+CFLAGS = -Wall -Wpedantic -Wextra -ggdb -std=c99 -I..
 
 run: main
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./main

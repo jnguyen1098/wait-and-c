@@ -40,8 +40,8 @@ int main(void)
 
     /* calling malloc using another file's function */
     char *pagakfdsgjhalskghaslggagjkh = this_malloc_comes_from_another_file();
-    if (pagakfdsgjhalskghaslggagjkh)
-        ;
+    if (pagakfdsgjhalskghaslggagjkh) {
+    }
 
     /* ... */
     return 0;
