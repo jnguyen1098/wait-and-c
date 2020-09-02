@@ -3,8 +3,7 @@
 void *ptr, *addrs[100000];
 size_t head;
 
-__attribute__((destructor))
-static inline void cleanup() {
+__attribute__((destructor)) static inline void cleanup() {
     for (size_t i = 0; i < head; i++)
         addrs[i] = (free(addrs[i]), NULL);
 }
