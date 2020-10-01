@@ -1,6 +1,6 @@
 # Wait and C
 
-This is my attempt to make a really limited but functional garbage collector for C. Every call to an allocation function (`malloc`, `calloc`, `realloc`) gets intercepted and recorded in an array of addresses. At program termination, each address in this stack is freed. I had a lot of fun abusing the C preprocessor in making this. _Enjoy!_
+This is my attempt to make a really limited garbage collector for C. Every call to an allocation function (`malloc`, `calloc`, `realloc`) gets intercepted and recorded in an array of addresses. At program termination, each address in this stack is freed. You can also manually release all memory at once. I had a lot of fun abusing the C preprocessor in making this. _Enjoy!_ 
 
 Installation is very seamless: you just have to add and `#include` a new `.h` file to your project—nothing else. All of your existing `free()` calls are removed, so this can even help fix broken projects with corrupted `free()`s.
 
