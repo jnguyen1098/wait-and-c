@@ -32,7 +32,7 @@ The `main.c` file contains many different ways to mess up memory management; fro
 ## ⚠️⚠️⚠️ Warnings ⚠️⚠️⚠️
 
 ### **Don't use non-standard allocation functions**
-**DO NOT** use deprecated dynamic allocation functions (such as `valloc()`, `pvalloc()`, `aligned_alloc()`, `alloca()`, among other disappoinments)—I do not intercept these calls!!! Unless you have a page fault fetish, you don't need `valloc()` or whatever.
+**DO NOT** use deprecated dynamic allocation functions (such as `valloc()`, `pvalloc()`, `aligned_alloc()`, `alloca()`, among other disappointments)—I do not intercept these calls!!! Unless you have a page fault fetish, you don't need `valloc()` or whatever.
 
 ### **FILEs**
 You're on your own when it comes to calling `fopen()` on `FILE` pointers. I'm not doubling this repo's code just to make sure the your `fopen()` is matched up with the `fclose()` you forgot to use. Use `valgrind` to aid you in your soul search if need be.
